@@ -5,7 +5,10 @@
 //  Created by Erich Flock on 19.06.22.
 //
 
-struct DailyScrum {
+import Foundation
+
+struct DailyScrum: Identifiable {
+    let id = UUID()
     let title: String
     let attendees: [String]
     let lengthInMinutes: Int
