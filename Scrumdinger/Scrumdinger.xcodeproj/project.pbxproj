@@ -66,6 +66,7 @@
 				367550E6285CD2B500B0E3A0 /* ScrumdingerApp.swift */,
 				367550F9285F7CE100B0E3A0 /* Views */,
 				367550F4285F79B300B0E3A0 /* Models */,
+				36755100285F803C00B0E3A0 /* Utils */,
 				367550EA285CD2B600B0E3A0 /* Assets.xcassets */,
 				367550EC285CD2B600B0E3A0 /* Preview Content */,
 			);
@@ -83,7 +84,6 @@
 		367550F4285F79B300B0E3A0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				36755100285F803C00B0E3A0 /* Utils */,
 				367550F5285F79C500B0E3A0 /* Theme.swift */,
 				367550F7285F7BE000B0E3A0 /* DailyScrum.swift */,
 			);
