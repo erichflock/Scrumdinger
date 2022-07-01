@@ -26,6 +26,7 @@ struct DetailEditView: View {
                     Text("\(Int(data.lenthInMinutes)) minutes")
                         .accessibilityHidden(true)
                 }
+                ThemePicker(selection: $data.theme)
             }
             
             Section(header: Text("Attendees")) {
