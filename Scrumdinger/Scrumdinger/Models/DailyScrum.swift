@@ -9,10 +9,10 @@ import Foundation
 
 struct DailyScrum: Identifiable {
     let id = UUID()
-    let title: String
-    let attendees: [Attendee]
-    let lengthInMinutes: Int
-    let theme: Theme
+    var title: String
+    var attendees: [Attendee]
+    var lengthInMinutes: Int
+    var theme: Theme
     
     init(title: String, attendees: [String], lengthInMinutes: Int, theme: Theme) {
         self.title = title
@@ -36,12 +36,19 @@ extension DailyScrum {
     struct Data {
         var title = ""
         var attendees: [Attendee] = []
-        var lenthInMinutes: Double = 5
+        var lengthInMinutes: Double = 5
         var theme: Theme = .seafoam
     }
     
     var data: Data {
-        .init(title: title, attendees: attendees, lenthInMinutes: Double(lengthInMinutes), theme: theme)
+        .init(title: title, attendees: attendees, lengthInMinutes: Double(lengthInMinutes), theme: theme)
+    }
+    
+    mutating func update(from data: Data) {
+        title = data.title
+        attendees = data.attendees
+        lengthInMinutes = Int(data.lengthInMinutes)
+        theme = data.theme
     }
 }
 
