@@ -16,7 +16,7 @@ struct MeetingView: View {
             RoundedRectangle(cornerRadius: 16)
                 .fill(scrum.theme.mainColor)
             VStack {
-                MeetingHeaderView()
+                MeetingHeaderView(secondsElapsed: 100, secondsRemaining: 40)
                 
                 Circle()
                     .strokeBorder(lineWidth: 24)
