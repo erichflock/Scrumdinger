@@ -43,12 +43,14 @@ struct MeetingHeaderView: View {
                     Text("Seconds Remaining")
                         .font(.caption)
                     Label("\(secondsRemaining)", systemImage: "hourglass.tophalf.fill")
+                        .labelStyle(.trailingIcon)
                 }
             }
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Time Remaining")
         .accessibilityValue("\(minutesRemaining) minutes")
+        .padding([.top, .horizontal])
     }
 }
 
