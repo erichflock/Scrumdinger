@@ -6,11 +6,17 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct MeetingView: View {
     
     @Binding var scrum: DailyScrum
     @StateObject var timer = ScrumTimer()
+    
+    private var player: AVPlayer {
+        try? AVAudioSession.sharedInstance().setCategory(.playback)
+        return AVPlayer.sharedDingPlayer
+    }
     
     var body: some View {
         ZStack {
@@ -22,24 +28,17 @@ struct MeetingView: View {
                 Circle()
                     .strokeBorder(lineWidth: 24)
                 
-                HStack {
-                    Text("Speaker 1 of 3")
-                    
-                    Spacer()
-                    
-                    Button {
-                        
-                    } label: {
-                        Image(systemName: "forward.fill")
-                    }
-                    .accessibilityLabel("Next speaker")
-                }
+                MeetingFooterView(speakers: timer.speakers, skipAction: timer.skipSpeaker)
             }
         }
         .padding()
         .foregroundColor(scrum.theme.accentColor)
         .onAppear() {
-            timer.reset(lengthInMinutes: 0, attendees: scrum.attendees)
+            timer.reset(lengthInMinutes: scrum.lengthInMinutes, attendees: scrum.attendees)
+            timer.speakerChangedAction = {
+                player.seek(to: .zero)
+                player.play()
+            }
             timer.startScrum()
         }
         .onDisappear() {
