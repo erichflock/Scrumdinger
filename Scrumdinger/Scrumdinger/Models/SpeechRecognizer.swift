@@ -73,7 +73,7 @@ class SpeechRecognizer: ObservableObject {
         The resulting transcription is continuously written to the published `transcript` property.
      */
     func transcribe() {
-        DispatchQueue(label: "Speech Recognizer Queue", qos: .background).async { [weak self] in
+        DispatchQueue(label: "Speech Recognizer Queue", qos: .userInteractive).async { [weak self] in
             guard let self = self, let recognizer = self.recognizer, recognizer.isAvailable else {
                 self?.speakError(RecognizerError.recognizerIsUnavailable)
                 return
