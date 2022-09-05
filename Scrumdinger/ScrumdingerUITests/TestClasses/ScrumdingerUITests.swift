@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import AVFoundation
 
 class ScrumdingerUITests: XCTestCase {
 
@@ -14,11 +15,20 @@ class ScrumdingerUITests: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
         
-        addUIInterruptionMonitor(withDescription: "Handle Alert") { element -> Bool in
-            return false
+        addUIInterruptionMonitor(withDescription: "Handle Alert") { alert -> Bool in
+            let allowButton = alert.buttons["Allow"]
+            if allowButton.waitForExistence(timeout: 5) {
+                allowButton.tap()
+            }
+            let okButton = alert.buttons["OK"]
+            if okButton.waitForExistence(timeout: 5) {
+                okButton.tap()
+            }
+            return true
         }
         
         app = XCUIApplication()
+        app.resetAuthorizationStatus(for: .microphone)
         app.launchArguments.append("UITestMode")
         app.launch()
     }
@@ -36,6 +46,17 @@ class ScrumdingerUITests: XCTestCase {
         
         app.tapOnButton("Delete")
     }
+    
+    func test_startMeeting() {
+        addNewDaily()
+        
+        app.tapOnText("New Daily")
+        
+        app.tapOnText("detailView_startMeetingLabel")
+        
+        XCTAssertTrue(app.textIsVisible("New Daily"), "Title 'New Daily' not found")
+    }
+    
 }
 
 //MARK: Helpers

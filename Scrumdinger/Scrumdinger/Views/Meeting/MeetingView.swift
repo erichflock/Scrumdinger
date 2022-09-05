@@ -54,6 +54,7 @@ struct MeetingView: View {
             scrum.history.insert(newHistory, at: 0)
         }
         .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle(scrum.title)
     }
 }
 

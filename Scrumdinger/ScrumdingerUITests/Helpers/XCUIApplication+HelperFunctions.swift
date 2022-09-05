@@ -18,6 +18,15 @@ extension XCUIApplication {
         }
     }
     
+    func tapOnText(_ identifier: String, timeout: Double = 60) {
+        let text = staticTexts[identifier].firstMatch
+        if text.waitForExistence(timeout: timeout) {
+            text.tap()
+        } else {
+            XCTFail("Fail to tap on text \(identifier)")
+        }
+    }
+    
     func textIsVisible(_ text: String, timeout: Double = 60) -> Bool {
         let staticText = staticTexts[text]
         return staticText.waitForExistence(timeout: timeout)

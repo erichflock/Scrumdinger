@@ -21,6 +21,7 @@ struct DetailView: View {
                     Label("Start Meeting", systemImage: "timer")
                         .font(.headline)
                         .foregroundColor(.accentColor)
+                        .accessibilityIdentifier("detailView_startMeetingLabel")
                 }
                 
                 HStack {
