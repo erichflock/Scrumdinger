@@ -13,22 +13,14 @@ struct ScrumsView: View {
     @Environment(\.scenePhase) private var scenePhase
     @State private var isPresentingNewScrumView = false
     @State private var newScrumData = DailyScrum.Data()
-    @State private var showDetail = false
     let saveAction: () -> Void
     
     var body: some View {
         List($scrums) { $scrum in
-            NavigationLink(destination: DetailView(scrum: $scrum),
-                           isActive: $showDetail) {
+            NavigationLink(destination: DetailView(scrum: $scrum)) {
                 CardView(scrum: scrum)
             }
-                           .simultaneousGesture(TapGesture().onEnded {
-                               showDetail.toggle()
-                           })
-                           .simultaneousGesture(LongPressGesture().onEnded { _ in
-                               print("Long Press")
-                           })
-                           .listRowBackground(scrum.theme.mainColor)
+            .listRowBackground(scrum.theme.mainColor)
         }
         .navigationTitle("Daily Scrums")
         .toolbar {
