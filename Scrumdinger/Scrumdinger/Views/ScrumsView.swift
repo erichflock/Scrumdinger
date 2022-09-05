@@ -16,11 +16,14 @@ struct ScrumsView: View {
     let saveAction: () -> Void
     
     var body: some View {
-        List($scrums) { $scrum in
-            NavigationLink(destination: DetailView(scrum: $scrum)) {
-                CardView(scrum: scrum)
+        List {
+            ForEach($scrums) { $scrum in
+                NavigationLink(destination: DetailView(scrum: $scrum)) {
+                    CardView(scrum: scrum)
+                }
+                .listRowBackground(scrum.theme.mainColor)
             }
-            .listRowBackground(scrum.theme.mainColor)
+            .onDelete(perform: delete)
         }
         .navigationTitle("Daily Scrums")
         .toolbar {
@@ -55,6 +58,10 @@ struct ScrumsView: View {
         .onChange(of: scenePhase) { phase in
             if phase == .inactive { saveAction() }
         }
+    }
+    
+    func delete(at offsets: IndexSet) {
+        scrums.remove(atOffsets: offsets)
     }
 }
 
