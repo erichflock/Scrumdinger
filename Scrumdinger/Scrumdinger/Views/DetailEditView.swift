@@ -16,6 +16,7 @@ struct DetailEditView: View {
         Form {
             Section(header: Text("Meeting Info")) {
                 TextField("Title", text: $data.title)
+                    .accessibilityIdentifier("detailEditView_titleTextField")
                 
                 HStack {
                     Slider(value: $data.lengthInMinutes, in: 5...30, step: 1) {
@@ -38,6 +39,7 @@ struct DetailEditView: View {
                 }
                 HStack {
                     TextField("New Attendee", text: $newAttendeeName)
+                        .accessibilityIdentifier("detailEditView_newAttendeeTextField")
                     Button(action: {
                         withAnimation {
                             let attendee = DailyScrum.Attendee(name: newAttendeeName)
@@ -49,6 +51,7 @@ struct DetailEditView: View {
                     }
                     .disabled(newAttendeeName.isEmpty)
                     .accessibilityLabel("Add attendee")
+                    .accessibilityIdentifier("detailEditView_addAttendeeButton")
                 }
             }
         }

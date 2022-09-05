@@ -51,6 +51,7 @@ struct ScrumsView: View {
                                 isPresentingNewScrumView = false
                                 newScrumData = DailyScrum.Data()
                             }
+                            .accessibilityIdentifier("scrumsView_addButton")
                         }
                     }
             }

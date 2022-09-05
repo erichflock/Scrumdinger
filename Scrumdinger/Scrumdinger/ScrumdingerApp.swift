@@ -27,10 +27,14 @@ struct ScrumdingerApp: App {
                 }
             }
             .task {
-                do {
-                    store.scrums = try await ScrumStore.load()
-                } catch let error {
-                    errorWrapper = ErrorWrapper(error: error, guidance: "Scrumdinger will load sample data and continue.")
+                if CommandLine.arguments.contains("UITestMode") {
+                    store.scrums.removeAll()
+                } else {
+                    do {
+                        store.scrums = try await ScrumStore.load()
+                    } catch let error {
+                        errorWrapper = ErrorWrapper(error: error, guidance: "Scrumdinger will load sample data and continue.")
+                    }
                 }
             }
             .sheet(item: $errorWrapper, onDismiss: {
