@@ -30,6 +30,7 @@ struct CardView: View {
         }
         .padding()
         .foregroundColor(scrum.theme.accentColor)
+        .contentShape(Rectangle()) //make the whole view tappable
     }
 }
 
