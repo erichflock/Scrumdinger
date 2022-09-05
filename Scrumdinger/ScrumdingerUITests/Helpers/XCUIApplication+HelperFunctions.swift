@@ -33,4 +33,13 @@ extension XCUIApplication {
         }
     }
     
+    func swipeLeft(_ text: String) {
+        let staticText = staticTexts[text]
+        if staticText.waitForExistence(timeout: 60) {
+            staticText.swipeLeft()
+        } else {
+            XCTFail("Fail to swipe left on \(text)")
+        }
+    }
+    
 }

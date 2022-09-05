@@ -21,7 +21,7 @@ class ScrumdingerUITests: XCTestCase {
 
     override func tearDownWithError() throws {}
 
-    func test_addScrum() {
+    func test_addAndRemoveScrum() {
         XCTAssertTrue(app.textIsVisible("Daily Scrums"), "Text 'Daily Scrums' not found")
         
         XCTAssertFalse(app.textIsVisible("New Daily", timeout: 5), "precondition")
@@ -37,5 +37,11 @@ class ScrumdingerUITests: XCTestCase {
         app.tapOnButton("scrumsView_addButton")
         
         XCTAssertTrue(app.textIsVisible("New Daily"), "Text 'New Daily' not found")
+        
+        print(app.debugDescription)
+        
+        app.swipeLeft("New Daily")
+        
+        app.tapOnButton("Delete")
     }
 }
